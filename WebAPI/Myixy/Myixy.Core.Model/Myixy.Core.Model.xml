@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Myixy.Core.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Myixy.Core.Model.Love">
+            <summary>
+            love
+            </summary>
+        </member>
+        <member name="P:Myixy.Core.Model.Love.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:Myixy.Core.Model.Love.Name">
+            <summary>
+            name
+            </summary>
+        </member>
+        <member name="P:Myixy.Core.Model.Love.Age">
+            <summary>
+            age
+            </summary>
+        </member>
+    </members>
+</doc>
