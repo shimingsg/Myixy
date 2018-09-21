@@ -9,33 +9,32 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <div class="shadow-lg">
-                        <div class=" p-3 mb-5 bg-white rounded">
-                            @Html.DisplayFor(modelItem => item.Heartfelt)
-                            @Html.DisplayFor(modelItem => item.CreatedDatetime)
-                        </div>
-                        <div>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div class="row shadow1">
+            <div class="lead">
+                @Html.DisplayFor(modelItem => item.Heartfelt)
+            </div>
+            <div class="col-md-4">
+                @Html.DisplayFor(modelItem => item.CreatedDatetime)
+            </div>
+            <div class="col-md-4">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    </div>
+
+}
+<link rel="stylesheet" href="~/css/sticky-footer.css" />
 <style type="text/css">
-    .shadow-lg {
+    .shadow1 {
         margin-top: 10px;
-        box-shadow: 0 0 30px black;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        /*box-shadow: 0 0 8px black;*/
         padding: 0 15px 0 15px;
     }
 </style>
