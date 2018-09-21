@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Myixy.App.Data;
 using Myixy.App.Models;
 
 namespace Myixy.App.Controllers
