@@ -64,7 +64,7 @@ namespace Myixy.App
             }
             else
             {
-                app.UseExceptionHandler("/Lines/Error");
+                app.UseExceptionHandler("/Line/Error");
                 app.UseHsts();
             }
 
@@ -78,7 +78,7 @@ namespace Myixy.App
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Lines}/{action=Index}/{id?}");
+                    template: "{controller=Line}/{action=Index}/{id?}");
             });
 
             AppDbContextSeed.Seed(app.ApplicationServices).Wait();

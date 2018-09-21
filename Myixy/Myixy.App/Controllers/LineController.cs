@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Myixy.App.Data;
 using Myixy.App.Models;
 using MyixyUtilities = Myixy.App.Utilities;
@@ -14,19 +15,22 @@ using MyixyUtilities = Myixy.App.Utilities;
 namespace Myixy.App.Controllers
 {
     [Authorize]
-    public class LinesController : Controller
+    public class LineController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<LineController> _logger;
 
-        public LinesController(AppDbContext context)
+        public LineController(AppDbContext context, ILogger<LineController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [AllowAnonymous]
         // GET: Lines
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Index page");
             return View(await _context.Lines.OrderByDescending(t => t.CreatedDatetime).ToListAsync());
         }
 
@@ -96,6 +100,7 @@ namespace Myixy.App.Controllers
         {
             if (id != line.Id)
             {
+                _logger.LogError($"{id} doesn't exist");
                 return NotFound();
             }
 
@@ -108,6 +113,7 @@ namespace Myixy.App.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    _logger.LogCritical("DbUpdateConcurrencyException in Edit submitting");
                     if (!LineExists(line.Id))
                     {
                         return NotFound();
