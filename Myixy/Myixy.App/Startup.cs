@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Myixy.App.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Myixy.App.Utilities;
 
 namespace Myixy.App
 {
@@ -34,11 +35,21 @@ namespace Myixy.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<IdentityUser>(opts =>
+            {
+                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                opts.User.RequireUniqueEmail = true;
+
+                opts.Password.RequireNonAlphanumeric = true;
+                opts.Password.RequireLowercase = true;
+                opts.Password.RequireUppercase = true;
+                opts.Password.RequireDigit = true;
+                opts.Password.RequiredLength = 6;
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -69,6 +80,8 @@ namespace Myixy.App
                     name: "default",
                     template: "{controller=Lines}/{action=Index}/{id?}");
             });
+
+            AppDbContextSeed.Seed(app.ApplicationServices).Wait();
         }
     }
 }

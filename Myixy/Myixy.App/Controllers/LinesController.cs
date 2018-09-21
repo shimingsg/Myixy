@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Myixy.App.Data;
 using Myixy.App.Models;
+using MyixyUtilities = Myixy.App.Utilities;
 
 namespace Myixy.App.Controllers
 {
@@ -26,7 +27,7 @@ namespace Myixy.App.Controllers
         // GET: Lines
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Lines.ToListAsync());
+            return View(await _context.Lines.OrderByDescending(t => t.CreatedDatetime).ToListAsync());
         }
 
         // GET: Lines/Details/5
@@ -62,8 +63,7 @@ namespace Myixy.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
-                line.CreatedDatetime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+                line.CreatedDatetime = MyixyUtilities.Common.GetChinaStandardTimeNow();
                 _context.Add(line);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
