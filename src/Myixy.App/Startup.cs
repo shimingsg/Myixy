@@ -35,7 +35,13 @@ namespace Myixy.App
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                if (Configuration["UseMySql"] == "1")
+                    options.UseMySql(Configuration.GetConnectionString("MySqlConnection"));
+                else
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddDefaultIdentity<IdentityUser>(opts =>
             {
                 opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-";
@@ -81,7 +87,7 @@ namespace Myixy.App
                     template: "{controller=Line}/{action=Index}/{id?}");
             });
 
-            AppDbContextSeed.Seed(app.ApplicationServices).Wait();
+            //AppDbContextSeed.Seed(app.ApplicationServices).Wait();
         }
     }
 }

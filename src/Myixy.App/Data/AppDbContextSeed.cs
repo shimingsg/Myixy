@@ -19,30 +19,35 @@ namespace Myixy.App.Data
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 // User Info
-                string userName = "myixy";
-                string email = "myixy666@gmail.com";
-                string password = "mySecur1ty!";
+                //string userName = "myixy";
+                //string email = "myixy666@gmail.com";
+                //string password = "mySecur1ty!";
                 string role = "SuperAdmin";
 
-                if (await userManager.FindByNameAsync(userName) == null)
+                if (await roleManager.FindByNameAsync(role) == null)
                 {
-                    if (await roleManager.FindByNameAsync(role) == null)
-                    {
-                        await roleManager.CreateAsync(new IdentityRole(role));
-                    }
-
-                    IdentityUser user = new IdentityUser
-                    {
-                        UserName = userName,
-                        Email = email
-                    };
-
-                    IdentityResult result = await userManager.CreateAsync(user, password);
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user, role);
-                    }
+                    await roleManager.CreateAsync(new IdentityRole(role));
                 }
+
+                //if (await userManager.FindByNameAsync(userName) == null)
+                //{
+                //    if (await roleManager.FindByNameAsync(role) == null)
+                //    {
+                //        await roleManager.CreateAsync(new IdentityRole(role));
+                //    }
+
+                //    IdentityUser user = new IdentityUser
+                //    {
+                //        UserName = userName,
+                //        Email = email
+                //    };
+
+                //    IdentityResult result = await userManager.CreateAsync(user, password);
+                //    if (result.Succeeded)
+                //    {
+                //        await userManager.AddToRoleAsync(user, role);
+                //    }
+                //}
             }
         }
     }
