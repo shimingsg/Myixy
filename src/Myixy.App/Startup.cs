@@ -37,10 +37,19 @@ namespace Myixy.App
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                if (Configuration["UseMySql"] == "1")
-                    options.UseMySql(Configuration.GetConnectionString("MySqlConnection"));
-                else
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                switch (Configuration["DbType"].ToLower())
+                {
+                    case "mysql":
+                        options.UseMySql(Configuration.GetConnectionString("mysql"));
+                        break;
+                    case "sqlite":
+                        options.UseSqlite(Configuration.GetConnectionString("sqlite"));
+                        break;
+                    case "mssql":
+                    default:
+                        options.UseSqlServer(Configuration.GetConnectionString("mssql"));
+                        break;
+                }
             });
             services.AddDefaultIdentity<IdentityUser>(opts =>
             {
