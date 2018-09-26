@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Myixy.App.Models.Line>
+﻿@model IEnumerable<Myixy.App.Models.Heartfelt>
 
 @{
     ViewData["Title"] = "My Heartfelt";
@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row shadow1">
             <div class="lead">
-                @Html.DisplayFor(modelItem => item.Heartfelt)
+                @Html.DisplayFor(modelItem => item.Content)
             </div>
             <div class="col-md-4">
                 @Html.DisplayFor(modelItem => item.CreatedDatetime)

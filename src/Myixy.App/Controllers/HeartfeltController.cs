@@ -15,26 +15,26 @@ using MyixyUtilities = Myixy.App.Utilities;
 namespace Myixy.App.Controllers
 {
     [Authorize]
-    public class LineController : Controller
+    public class HeartfeltController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly ILogger<LineController> _logger;
+        private readonly ILogger<HeartfeltController> _logger;
 
-        public LineController(AppDbContext context, ILogger<LineController> logger)
+        public HeartfeltController(AppDbContext context, ILogger<HeartfeltController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
         [AllowAnonymous]
-        // GET: Lines
+        // GET: Heartfelts
         public async Task<IActionResult> Index()
         {
             _logger.LogInformation("Index page");
-            return View(await _context.Lines.OrderByDescending(t => t.CreatedDatetime).ToListAsync());
+            return View(await _context.Heartfelts.OrderByDescending(t => t.CreatedDatetime).ToListAsync());
         }
 
-        // GET: Lines/Details/5
+        // GET: Heartfelts/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -42,40 +42,40 @@ namespace Myixy.App.Controllers
                 return NotFound();
             }
 
-            var line = await _context.Lines
+            var heartfelts = await _context.Heartfelts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (line == null)
+            if (heartfelts == null)
             {
                 return NotFound();
             }
 
-            return View(line);
+            return View(heartfelts);
         }
 
-        // GET: Lines/Create
+        // GET: Heartfelts/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Lines/Create
+        // POST: Heartfelts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedDatetime,UserId,Heartfelt")] Line line)
+        public async Task<IActionResult> Create([Bind("Id,CreatedDatetime,UserId,Heartfelt")] Heartfelt heartfelt)
         {
             if (ModelState.IsValid)
             {
-                line.CreatedDatetime = MyixyUtilities.Common.GetChinaStandardTimeNow();
-                _context.Add(line);
+                heartfelt.CreatedDatetime = MyixyUtilities.Common.GetChinaStandardTimeNow();
+                _context.Add(heartfelt);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(line);
+            return View(heartfelt);
         }
 
-        // GET: Lines/Edit/5
+        // GET: Heartfelts/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -83,22 +83,22 @@ namespace Myixy.App.Controllers
                 return NotFound();
             }
 
-            var line = await _context.Lines.FindAsync(id);
-            if (line == null)
+            var heartfelt = await _context.Heartfelts.FindAsync(id);
+            if (heartfelt == null)
             {
                 return NotFound();
             }
-            return View(line);
+            return View(heartfelt);
         }
 
-        // POST: Lines/Edit/5
+        // POST: Heartfelts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CreatedDatetime,UserId,Heartfelt")] Line line)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,CreatedDatetime,UserId,Heartfelt")] Heartfelt heartfelt)
         {
-            if (id != line.Id)
+            if (id != heartfelt.Id)
             {
                 _logger.LogError($"{id} doesn't exist");
                 return NotFound();
@@ -108,13 +108,13 @@ namespace Myixy.App.Controllers
             {
                 try
                 {
-                    _context.Update(line);
+                    _context.Update(heartfelt);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     _logger.LogCritical("DbUpdateConcurrencyException in Edit submitting");
-                    if (!LineExists(line.Id))
+                    if (!HeartfeltExists(heartfelt.Id))
                     {
                         return NotFound();
                     }
@@ -125,10 +125,10 @@ namespace Myixy.App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(line);
+            return View(heartfelt);
         }
 
-        // GET: Lines/Delete/5
+        // GET: Heartfelts/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -136,30 +136,30 @@ namespace Myixy.App.Controllers
                 return NotFound();
             }
 
-            var line = await _context.Lines
+            var heartfelt = await _context.Heartfelts
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (line == null)
+            if (heartfelt == null)
             {
                 return NotFound();
             }
 
-            return View(line);
+            return View(heartfelt);
         }
 
-        // POST: Lines/Delete/5
+        // POST: Heartfelts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var line = await _context.Lines.FindAsync(id);
-            _context.Lines.Remove(line);
+            var heartfelt = await _context.Heartfelts.FindAsync(id);
+            _context.Heartfelts.Remove(heartfelt);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LineExists(string id)
+        private bool HeartfeltExists(string id)
         {
-            return _context.Lines.Any(e => e.Id == id);
+            return _context.Heartfelts.Any(e => e.Id == id);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

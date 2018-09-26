@@ -13,6 +13,7 @@ using Myixy.App.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myixy.App.Utilities;
+using Myixy.App.Areas.Identity.Data;
 
 namespace Myixy.App
 {
@@ -53,7 +54,8 @@ namespace Myixy.App
                         break;
                 }
             });
-            services.AddDefaultIdentity<IdentityUser>(opts =>
+
+            services.AddIdentity<MyixyUser, MyixyRole>(opts =>
             {
                 opts.Password.RequireDigit = true;
                 opts.Password.RequireLowercase = true;
@@ -66,24 +68,12 @@ namespace Myixy.App
                 opts.Lockout.MaxFailedAccessAttempts = 5;
                 opts.Lockout.AllowedForNewUsers = true;
 
-                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-";
-                opts.User.RequireUniqueEmail = true;
+                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-+";
+                opts.User.RequireUniqueEmail = false;
 
             })
-            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddErrorDescriber<CustomIdentityErrorDescriber>();
-
-            services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
-            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -98,24 +88,21 @@ namespace Myixy.App
             }
             else
             {
-                app.UseExceptionHandler("/Line/Error");
+                app.UseExceptionHandler("/Heartfelt/Error");
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Line}/{action=Index}/{id?}");
+                    template: "{controller=Heartfelt}/{action=Index}/{id?}");
             });
-
-            //AppDbContextSeed.Seed(app.ApplicationServices).Wait();
         }
     }
 }

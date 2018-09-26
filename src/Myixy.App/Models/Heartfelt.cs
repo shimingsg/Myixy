@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Myixy.App.Models
 {
-    public class Line
+    public class Heartfelt
     {
         public string Id { get; set; }
 
@@ -13,6 +13,6 @@ namespace Myixy.App.Models
 
         public string UserId { get; set; }
 
-        public string Heartfelt { get; set; }
+        public string Content { get; set; }
     }
 }
