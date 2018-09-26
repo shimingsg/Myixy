@@ -9,7 +9,7 @@ using Myixy.App.Data;
 namespace Myixy.App.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180926080549_Init_Proj")]
+    [Migration("20180926090831_Init_Proj")]
     partial class Init_Proj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,8 @@ namespace Myixy.App.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NickName");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);

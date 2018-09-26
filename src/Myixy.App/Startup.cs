@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Myixy.App.Utilities;
 using Myixy.App.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Myixy.App.Areas.Identity.Services;
 
 namespace Myixy.App
 {
@@ -76,6 +78,9 @@ namespace Myixy.App
             .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
