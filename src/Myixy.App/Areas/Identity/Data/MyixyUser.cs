@@ -8,6 +8,9 @@ namespace Myixy.App.Areas.Identity.Data
 {
     public class MyixyUser : IdentityUser
     {
+        [PersonalData]
+        public string NickName { get; set; }
+
         public virtual ICollection<MyixyUserClaim> Claims { get; set; }
         public virtual ICollection<MyixyUserLogin> Logins { get; set; }
         public virtual ICollection<MyixyUserToken> Tokens { get; set; }

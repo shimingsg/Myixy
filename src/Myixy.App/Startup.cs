@@ -69,7 +69,7 @@ namespace Myixy.App
                 opts.Lockout.AllowedForNewUsers = true;
 
                 opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-+";
-                opts.User.RequireUniqueEmail = false;
+                opts.User.RequireUniqueEmail = true;
 
             })
             .AddEntityFrameworkStores<AppDbContext>()
