@@ -75,6 +75,7 @@ namespace Myixy.App
 
             })
             .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders()
             .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
