@@ -63,7 +63,7 @@ namespace Myixy.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedDatetime,UserId,Heartfelt")] Heartfelt heartfelt)
+        public async Task<IActionResult> Create([Bind("Id,CreatedDatetime,UserId,Content")] Heartfelt heartfelt)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace Myixy.App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,CreatedDatetime,UserId,Heartfelt")] Heartfelt heartfelt)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,CreatedDatetime,UserId,Content")] Heartfelt heartfelt)
         {
             if (id != heartfelt.Id)
             {
