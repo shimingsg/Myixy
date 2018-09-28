@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Upload_User_Profil_Image";
+}
+
+<h2>Upload_User_Profil_Image</h2>
+
+
+<form asp-controller="Home" asp-action="Upload_User_Profil_Image" method="post"
+      enctype="multipart/form-data">
+
+    <input type="file" name="uploaded_File" />
+    <br />
+    <button type="submit" style="">Upload</button>
+</form>
+@if (ViewData["FileResized_40"] != null)
+{
+    <br />
+    <span>Resized 40</span>
+    <img src="@ViewData["FileResized_40"]" alt="Uploaded Image" />
+    <br />
+}
+
+@if (ViewData["FileResized_80"] != null)
+{
+    <br />
+    <span>Resized 80</span>
+    <img src="@ViewData["FileResized_80"]" alt="Uploaded Image" />
+    <br />
+}
+
+@if (ViewData["FileResized_120"] != null)
+{
+    <br />
+    <span>Resized 120</span>
+    <img src="@ViewData["FileResized_120"]" alt="Uploaded Image" />
+    <br />
+}
+
+@if (ViewData["FileResized_240"] != null)
+{
+    <br />
+    <span>Resized 240</span>
+    <img src="@ViewData["FileResized_240"]" alt="Uploaded Image" />
+    <br />
+}
+
+@if (ViewData["FileResized_400"] != null)
+{
+    <br />
+    <span>Resized 400</span>
+    <img src="@ViewData["FileResized_400"]" alt="Uploaded Image" />
+    <br />
+}
+
+
+@if (ViewData["FileUploaded"] != null)
+{
+    <br />
+    <span>Original Upload</span>
+    <img src="@ViewData["FileUploaded"]" alt="Uploaded Image" />
+    <br />
+}
+
+@if (ViewData["Error"] != null)
+{
+    <label>Error= @ViewData["Error"]</label>
+} 

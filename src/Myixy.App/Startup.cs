@@ -16,6 +16,8 @@ using Myixy.App.Utilities;
 using Myixy.App.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Myixy.App.Areas.Identity.Services;
+using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 namespace Myixy.App
 {
