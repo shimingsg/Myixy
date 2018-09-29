@@ -45,7 +45,7 @@ namespace Myixy.App.Controllers
         {
             //https://codedocu.com/Net-Framework/ASP_dot_Net-Core/Files-Folders/Asp_dot_Net-Core_colon_-Sample-Code-Photo-Upload-and-Resize-Photo?2210
             //--------< Upload_ImageFile() >-------- 
-            string sResult = "";
+            //string sResult = "";
 
             //< check > 
             if (uploaded_File == null || uploaded_File.Length == 0)
