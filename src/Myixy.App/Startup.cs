@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Myixy.App.Areas.Identity.Services;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Myixy.App
 {
@@ -112,6 +113,12 @@ namespace Myixy.App
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             app.UseAuthentication();
 
             app.UseMvc(routes =>
