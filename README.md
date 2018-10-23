@@ -8,6 +8,8 @@
 4. 安装Niginx
 5. 如果直接使用命令 dotnet.exe xxx.dll, 安装supervisor守护
 6. 配置华为云对外端口，否则外网访问不了
-7. 其他系统配置
-    系统时区，默认是纽约时间
+7. 其他系统配置, 系统时区，默认是纽约时间, 设置为北京时间
+   a. apt-get install ntpdate -y
+   b. ntpdate time.windows.com
+   c. dpkg-reconfigure tzdata
     
