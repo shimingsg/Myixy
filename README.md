@@ -1,4 +1,4 @@
-# Myixy
+# asp.net core 个人练习
 
 在华为云Debian 9 上部署 asp.net core 
 
