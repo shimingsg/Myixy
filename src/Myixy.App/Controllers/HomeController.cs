@@ -17,6 +17,7 @@ using Myixy.App.Models;
 
 namespace Myixy.App.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
