@@ -125,7 +125,7 @@ namespace Myixy.App
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Heartfelt}/{action=Index}/{id?}");
+                    template: "{controller=Heartfelt}/{action=Home}/{id?}");
             });
         }
     }
