@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Myixy.App.Models.Heartfelt>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<Myixy.App.Models.Heartfelt>
+
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "My Heartfelt";
@@ -7,7 +10,7 @@
 <h2>My Heartfelt</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localizer["Create"]</a>
 </p>
 
 @foreach (var item in Model)

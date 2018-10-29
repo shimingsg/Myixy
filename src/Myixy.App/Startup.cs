@@ -19,6 +19,9 @@ using Myixy.App.Areas.Identity.Services;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Myixy.App
 {
@@ -81,7 +84,8 @@ namespace Myixy.App
             .AddDefaultTokenProviders()
             .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
-            services.ConfigureApplicationCookie(options => {
+            services.ConfigureApplicationCookie(options =>
+            {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
@@ -90,7 +94,14 @@ namespace Myixy.App
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddLocalization(o =>
+            {
+                o.ResourcesPath = "Resources";
+            });
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -113,6 +124,19 @@ namespace Myixy.App
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            IList<CultureInfo> supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("zh-CN"),
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("zh-CN"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {

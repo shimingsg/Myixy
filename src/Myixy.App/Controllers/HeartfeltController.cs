@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Myixy.App.Data;
 using Myixy.App.Models;
@@ -19,11 +20,15 @@ namespace Myixy.App.Controllers
     {
         private readonly AppDbContext _context;
         private readonly ILogger<HeartfeltController> _logger;
+        private readonly IStringLocalizer<HeartfeltController> _localizer;
+        //https://joonasw.net/view/aspnet-core-localization-deep-dive
 
-        public HeartfeltController(AppDbContext context, ILogger<HeartfeltController> logger)
+        public HeartfeltController(AppDbContext context, ILogger<HeartfeltController> logger, 
+            IStringLocalizer<HeartfeltController> localizer)
         {
             _context = context;
             _logger = logger;
+            _localizer = localizer;
         }
 
         [AllowAnonymous]
@@ -31,7 +36,7 @@ namespace Myixy.App.Controllers
         {
             return View();
         }
-        
+
         // GET: Heartfelts
         public async Task<IActionResult> Index()
         {
