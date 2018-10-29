@@ -9,8 +9,9 @@ namespace Myixy.App.Utilities
     {
         public static DateTime GetChinaStandardTimeNow()
         {
-            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+            //TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
+            //return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cstZone);
+            return DateTime.Now;
         }
     }
 }

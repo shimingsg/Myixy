@@ -27,6 +27,11 @@ namespace Myixy.App.Controllers
         }
 
         [AllowAnonymous]
+        public IActionResult Home()
+        {
+            return View();
+        }
+        
         // GET: Heartfelts
         public async Task<IActionResult> Index()
         {

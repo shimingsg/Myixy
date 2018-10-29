@@ -13,7 +13,7 @@ using Myixy.App.Areas.Identity.Data;
 
 namespace Myixy.App.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<MyixyUser> _signInManager;
