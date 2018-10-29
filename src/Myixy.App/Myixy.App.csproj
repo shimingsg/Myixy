@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-Myixy.App-2C223597-43CC-45EF-A205-A3A5339A3A5F</UserSecretsId>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="tsScripts\app.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -17,9 +22,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="tsScripts\app.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="appscripts\" />
   </ItemGroup>
 
 </Project>
