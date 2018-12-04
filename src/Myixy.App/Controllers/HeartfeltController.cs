@@ -41,7 +41,7 @@ namespace Myixy.App.Controllers
         public async Task<IActionResult> Index()
         {
             _logger.LogInformation("Index page");
-            return View(await _context.Heartfelts.OrderByDescending(t => t.CreatedDatetime).ToListAsync());
+            return View(await _context.Heartfelts.OrderByDescending(t => t.CreatedDatetime).Take(10).ToListAsync());
         }
 
         // GET: Heartfelts/Details/5
